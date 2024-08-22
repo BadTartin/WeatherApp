@@ -170,3 +170,59 @@ body {
   transform-origin: left center;
   perspective: 1000px;
 }
+
+@media screen and (max-width: 768px) {
+  #header {
+    font-size: 32px;
+    height: auto;
+    padding: 10px 0;
+  }
+
+  #top {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+  }
+
+  #display {
+    width: 90%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  #input {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+
+  #forecast {
+    flex-wrap: wrap;
+    justify-content: center;
+    height: auto;
+    overflow-x: visible;
+  }
+
+  .forecast-day {
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #header {
+    font-size: 24px;
+  }
+
+  #upperdisplay {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #icon {
+    width: 100px;
+    height: 100px;
+  }
+
+  .forecast-day {
+    width: calc(50% - 10px);
+  }
+}
