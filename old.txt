@@ -1,0 +1,57 @@
+import "./style.css";
+import { WEATHER_API_KEY, GIPHY_API_KEY } from "./config.js";
+
+// Write the functions that hit the API. You’re going to want functions that can
+// take a location and return the weather data for that location.
+// For now, just console.log() the information.
+
+document.addEventListener("DOMContentLoaded", function () {
+  const locInput = document.querySelector("#location");
+  const gifContainer = document.querySelector("#gif");
+  const gif = document.createElement("img");
+  gifContainer.appendChild(gif);
+
+  if (locInput) {
+    locInput.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+
+        let location = locInput.value;
+        const requestString = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=${WEATHER_API_KEY}`;
+
+        (async function () {
+          try {
+            const response = await fetch(requestString, { mode: "cors" });
+            const result = await response.json();
+            const outputData = {
+              Description: result.description,
+              Temp: result.currentConditions.temp,
+              Feelslike: result.currentConditions.feelslike,
+              Humidity: result.currentConditions.humidity,
+              Icon: result.currentConditions.icon,
+              Precip: result.currentConditions.precip,
+              PrecipProb: result.currentConditions.precipprob,
+              PrecipType: result.currentConditions.preciptype,
+            };
+
+            async function fetchGif(searchTerm) {
+              const url = `https://api.giphy.com/v1/gifs/translate?api_key=${GIPHY_API_KEY}&s=${searchTerm}`;
+              const response = await fetch(url, { mode: "cors" });
+              const gifData = await response.json();
+              gif.src = gifData.data.images.original.url;
+            }
+
+            await fetchGif(outputData.Icon);
+
+            let temp = document.querySelector("#display");
+            temp.textContent = "Temperature: " + outputData.Temp;
+          } catch (error) {
+            console.error("Error:", error);
+          }
+        })();
+      }
+    });
+  } else {
+    console.error("Could not find element with id 'location'");
+  }
+});

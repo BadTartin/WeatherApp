@@ -1,0 +1,172 @@
+/* * {
+  border: 1px solid red;
+} */
+
+* {
+  font-family: Verdana, Geneva, Tahoma, sans-serif, Serif;
+  /* color: rgb(71, 68, 68); */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: linear-gradient(rgb(76, 129, 220), rgb(151, 174, 214));
+  min-height: 100vh; /* ensure it takes full screen height */
+  padding-bottom: 30px; /* adds some padding at bottom */
+}
+
+#header {
+  height: 15vh;
+  font-size: 48px;
+  /* font-family: Garamond, Serif; */
+  color: rgb(46, 46, 46);
+  align-content: center;
+}
+
+#maincontainer {
+  height: auto; /* allow it to grow */
+  min-height: 80vh; /* maintain your general layout */
+}
+
+#top {
+  display: flex;
+  height: 60%;
+  width: 90vw;
+}
+
+#display {
+  width: 30%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+#upperdisplay {
+  height: 70%;
+  display: flex;
+  justify-content: space-around;
+}
+
+#icon {
+  width: 150px; /* Set a specific width */
+  height: 150px; /* Set a specific height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#icon img {
+  object-fit: contain;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+#temp {
+  align-content: center;
+  font-size: 32px;
+}
+
+#forecast {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: auto; /* let it be as tall as it needs */
+  gap: 10px; /* add space between forecast days */
+  padding: 10px 0; /* add some vertical padding */
+}
+
+#input {
+  width: 25%;
+  align-content: center;
+}
+
+#gif {
+  height: 42%;
+}
+
+#lowerdisplay {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  height: 30%;
+}
+
+#high,
+#low,
+#precip {
+  align-content: center;
+  text-align: center;
+}
+
+#description {
+  grid-column: 1 / 4;
+  text-align: center;
+}
+
+.forecast-day {
+  width: 120px; /* Set a specific width */
+  height: 200px; /* Set a specific height. Adjust as needed */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between; /* This gives even spacing */
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.2); /* Slightly transparent */
+  border-radius: 8px; /* Optional: gives a nice rounded look */
+  margin: 0 5px; /* Space between forecast days */
+}
+
+.forecast-icon {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+#forecast {
+  display: flex;
+  justify-content: space-between;
+  height: 220px; /* This should be slightly larger than .forecast-day */
+  overflow-x: auto; /* Allow horizontal scrolling if needed */
+  padding: 10px 0; /* Gives some vertical padding */
+}
+
+#location-display {
+  text-align: center;
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+#background-icon {
+  position: fixed;
+  top: -100px;
+  right: -100px;
+  width: 800px;
+  height: 800px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.1;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes slideAndFlip {
+  0% {
+    transform: translateX(-100%) rotateY(-90deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) rotateY(0);
+    opacity: 1;
+  }
+}
+
+.forecast-day {
+  /* ... existing styles ... */
+  animation: slideAndFlip 0.5s ease-out forwards;
+  opacity: 0;
+  transform-origin: left center;
+  perspective: 1000px;
+}
